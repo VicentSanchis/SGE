@@ -156,16 +156,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#caracteristiques-dodoo">
+<a class="md-nav__link" href="#installar-odoo">
 <span class="md-ellipsis">
-      Característiques d'Odoo
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#installacions">
-<span class="md-ellipsis">
-      Instal·lacions
+      Instal·lar Odoo
     </span>
 </a>
 </li>
@@ -233,16 +226,171 @@
 <article class="md-content__inner md-typeset">
 <h1 id="tema-2-implantacio-de-sistemes-erp-crm">Tema 2 - Implantació de sistemes ERP-CRM</h1>
 <h2 id="introduccio">Introducció</h2>
+<p>Quan es parla de sistemes ERP-CRM el mot implantació s’acostuma a utilitzar per fer referència al procés global que té com a objectiu final la posada en marxa d’un nou sistema ERP-CRM a l’organització. Aquest procés té diverses fases: anàlisi de requisits, estudi de possibles solucions, decisió per un producte, instal·lació i configuració, migració de dades -si s’escau-, formació dels usuaris i execució d’adaptacions -si s’escau-. Una implantació entesa així és un procés molt complex que ha d’estar dirigit per professionals especialistes (consultors).</p>
+<p>Per <strong>implantació tècnica</strong> de sistemes ERP-CRM entenem el subprocés amb les següents operacions imprescindibles:</p>
+<ol>
+<li>Instal·lació del programari, en un determinat maquinari i sistema operatiu, seguint les prescripcions del fabricant.</li>
+<li>Instal·lació de mòduls addicionals que corresponguin, segons requeriments.</li>
+<li>Configuració del programari, segons les possibilitats que es facilitin, per adequar-lo als requeriments de l'organització.</li>
+<li>Verificació del correcte funcionament, segons requeriments.</li>
+<li>Documentació de les operacions realitzades i incidències aparegudes, amb la seua resolució.</li>
+</ol>
+<p>La llista d'operacions anteriors es pot veure ampliada amb <strong>dues operacions més:</strong></p>
+<ul>
+<li>(<strong>6</strong>) Migració de dades del programari de gestió empresarial existent cap al nou programari, si així està contemplat en el projecte d’implantació del nou programari.</li>
+<li>(<strong>7</strong>) En cas que el programari que instal·lem incorpori un mecanisme de salvaguarda de les dades, posada en marxa i verificació de la correcta recuperació de les dades en el cas d’haver ocorregut un desastre.</li>
+</ul>
+<p>Per executar aquestes operacions pot ser necessari l’ajut de dos <strong>perfils professionals</strong> diferents del nostre i que, en moltes ocasions, recauen en un mateix professional:</p>
+<ul>
+<li>L'administrador del sistema , ele cas que calgui efectuar alguna configuració pel que fa la sistema operatiu.</li>
+<li>L'administrador del sistema gestor de bases de dades, el el cas que el nostre programari haja de connectar amb un SGBD corporatiu, ja instal·lat o que calga instal·lar.</li>
+</ul>
+<p>Tot procés d’implantació tècnica d’un ERP-CRM consta de les operacions anteriors. En les diverses combinacions possibles de sistema ERP-CRM amb sistema operatiu i amb sistema gestor de bases de dades, hi intervenen tantes variables que cada combinació necessitaria el seu propi aprenentatge. És a dir, a diferència del procés d’aprendre a conduir, que ens serveix gairebé per a qualsevol cotxe, la implantació tècnica d’un sistema ERP-CRM no és estàndard i, per tant, un implantador necessita l’aprenentatge concret per a cada combinació possible. Per altra banda, l’experiència acumulada d’un implantador en diverses situacions ajuda que cada nova situació necessiti un aprenentatge més curt.</p>
+<h3 id="odoo-erp">Odoo ERP</h3>
+<p>Ja que no podem pretendre endinsar-nos en la implantació tècnica de qualsevol sistema ERP-CRM en qualsevol de les plataformes suportades (sistema operatiu + SGBD), ens centrarem en un producte i en la implantació hi posarem en pràctica totes les operacions. El producte escollit ha estat el sistema ERP-CRM de codi obert Odoo.</p>
+<p><strong>Odoo</strong> és un sistema ERP-CRM potent i actual, on conviuen una versió de codi obert (Odoo community) i una amb llicència (Odoo enterprise). Nosaltres, a partir d’ara, quan parlem d’Odoo ens referirem a Odoo community. Odoo era conegut fins a la versió 7 com a OpenERP, i prèviament com a TinyERP.</p>
+<details class="note">
+<summary>Llicència LGPL</summary>
+<p>La llicència LGPL és una llicència copyleft derivada de la GPL de GNU, però que permet que programes propietaris usin les llibreries i aplicacions sota aquesta llicència. L’LGPL permet l’ús de programes lliures amb programari propietari. El programa, per si mateix, es redistribueix com si estigués sota la llicència GPL, però es permet integrar-la a qualsevol altre programari gairebé sense cap limitació.</p>
+</details>
 <details class="question">
 <summary>Activitat 201. Vídeo Odoo</summary>
-<p>Visualitzar un vídeo d'introducció a Odoo i respondre preguntes clau</p>
+<p>Visualitza el següent un vídeo d'introducció a Odoo i respon a les següents qüestions:</p>
+<ol>
+<li>Quin concepte resumiries d’Odoo i per què creus que ho va destacar el vídeo?</li>
+<li>Quins són alguns dels mòduls mostrats (CRM, POS, recursos humans, etc.)? Explica’n un amb les teues  paraules.</li>
+<li>Quina diferència veus entre les versions “comunitària” i “enterprise” d’Odoo?</li>
+<li>Quines funcionalitats del vídeo creus que serien més útils per a una "petita empresa"?</li>
+<li>Quina part de la interfície o flux de treball t'ha semblat més intuïtiva o sorprenent?</li>
+<li>Segons el que es veu, quins requisits tècnics mínims creus que pot tenir Odoo (servidor, memòria, sistema operatiu)?</li>
+<li>Hi ha alguna característica mostrada que penses que podria ser difícil de personalitzar o mantenir?</li>
+<li>Si haguessis de presentar Odoo a una empresa desconeixedora, quin aspecte destacaràs primer i per què?</li>
+<li>Quines limitacions o punts dèbils vas detectar, si n’hi ha?</li>
+<li>Com creus que Odoo pot complementar-se amb altres sistemes (BI, mòduls externs)?</li>
+</ol>
 </details>
-<h2 id="caracteristiques-dodoo">Característiques d'Odoo</h2>
+<h3 id="caracteristiques-dodoo">Característiques d'Odoo</h3>
+<p>Les característiques bàsiques que hauríem de tenir en compte a l'hora d'avaluar un sistema ERP-CRM i els valors per al sistema Odoo són:</p>
+<div class="highlight"><pre><span></span><code>- Llicència: LGPLv3
+- Desplegaments possibles:
+    - On-premise sota els SO: Linux i Windows
+    - SaaS
+    - odoo.sh és una plataforma per desenvolupadors, que el hosting i permet de manera molt senzilla crear nous mòduls, provar-los, i portar-los a producció.
+- Arquitectura: Client-servidor amb tres capes clarament diferenciables:
+    - la base de ades en l'SGBD PostgreSQL, que només conté dades i no conté cap lògica de negoci (és a dir, no incorpora funcions, procediments o disparadors)
+    - El servidor Odoo que conté tota la lògica de negoci amb un nucli base i una estructura que permet anar afegint mòduls segons les necessitats de l’organització. Odoo facilita una llarga llista de mòduls que es pot ampliar amb el disseny de mòduls propis per donar cobertura a les necessitats de l’organització.
+
+    - La capa dels clients consisteix en un client web, accessible des de qualsevol navegador.
+- Sistema Operatiu: Servidor sobre Windows o Linux
+- SGBD: PostgreSQL (el fet que la BD no contingui cap lògica de negoci fa pensar que hauria de ser fàcil la substitució de PostgreSQL per un altre SGBD).
+- Cost per a la versió Enterprise: Pot trobar-se una simulació a: bit.ly/31sXlWk. Com es pot comprovar els preus depenen del nombre d’usuaris i els mòduls que es trien.
+</code></pre></div>
+<p>Respecte a les funcionalitats segons les versions, la <strong>versió Enterprise</strong> (de pagament) incorpora entre d'altres:</p>
+<div class="highlight"><pre><span></span><code>- Llicència "Odoo Enterprise Edition License 1.0.
+- Suport funcional il·limitat.
+- Actualització de versions
+- Hosting.
+- Interfície d'usuari mòbil.
+- Odoo studio (dissenyar de manera gràfica mòduls, informes, pantalles...)
+- Mòduls exculsius que amplien estàndards.
+</code></pre></div>
 <details class="question">
 <summary>Activitat 202. Taula resum</summary>
 <p>Anotar característiques clau d'Odoo segons rols (usuari, tècnic, administrador)</p>
 </details>
-<h2 id="installacions">Instal·lacions</h2>
+<h3 id="implantacio-tecnica-dodoo">Implantació tècnica d'Odoo</h3>
+<p>Les distribucions All-In-One (tot en un) incorporen totes les peces imprescindibles per poder instal·lar un servidor Odoo, incloent-hi, fins i tot, una versió de l’SGBD PostgreSQL. Com que se suposa que no som experts en instal·lació i configuració
+de l’SGBD PostgreSQL i, ja que se’ns facilita la distribució All-In-One que inclou la instal·lació d’una versió de PostgreSQL, la lògica ens diu que comencem per instal·lar aquesta distribució en un sistema operatiu conegut (Windows). </p>
+<p>L’itinerari de passos a seguir, amb l’objectiu final de tenir els coneixements adequats per poder efectuar implantacions tècniques d’Odoo, és:</p>
+<ol>
+<li>Instal·lar Odoo All-In-One en el SO Windows.</li>
+<li>Adquirir coneixements bàsics del servidor PostgreSQL.</li>
+<li>Instal·lar Odoo en SO Windows connectant amb un SGBD PostgreSQL existent.</li>
+<li>Instal·lar Odoo en sistemes operatius Linux.</li>
+<li>Instal·lar Odoo sobre un contenidor Docker.</li>
+<li>Configuració inicial d’Odoo. Instal·lació de mòduls, configuració empresa.</li>
+<li>Empleats vs. usuaris en odoo. Importació massiva.</li>
+<li>Tercers en Odoo. Mòdul de compres i vendes. Inventari.</li>
+<li>Web en Odoo. Creació de la web d’una empresa i botiga online.</li>
+</ol>
+<h2 id="installar-odoo">Instal·lar Odoo</h2>
+<p>Hi ha diferents maneres d’instal·lar Odoo. El propòsit d’aquesta instal·lació és molt variat, des de la seva prova a una instal·lació en un entorn de producció, passant per la creació d’una màquina de desenvolupament de mòduls personalitzats. Igual que existeixen  molts propòsits, existeixen moltes maneres d’instal·lar.</p>
+<p>Destaquem tres tipus instal·lacions diferents:</p>
+<ul>
+<li>Instal·lació del paquet All-In-One para Windows. La més senzilla, i amb propòsit de conèixer i provar el software.</li>
+<li>Instal·lació del codi font d’Odoo sobre un host Ubuntu Server. Aquesta seria una instal·lació amb l’objectiu de fer servir la màquina en un entorn de producció definitiu. Es podran conèixer a fons tots els elements que componen Odoo.</li>
+<li>Instal·lació d’Odoo sobre un contenidor Docker. Aquest tipus d’instal·lació està destinada a tasques de desenvolupament de codi o de prova de noves versions. Docker és una tecnologia actual que val la pena conèixer. </li>
+</ul>
+<p>Nosaltres optarem per instal·lar Odoo en Docker.</p>
+<h3 id="installar-odoo-a-docker">Instal·lar Odoo a Docker</h3>
+<p>Segons la seva web oficial «la idea darrere Docker és crear contenidors lleugers i portables per a les aplicacions software que puguin executar-se en qualsevol màquina amb Docker instal·lat, independentment del sistema operatiu que la màquina tingui per sota, facilitant així també els desplegaments».</p>
+<p>Per a accedir com a usuaris normals a una aplicació, aquesta aplicació software necessita estar executant-se en una màquina, en un ordinador. Però a més, depenent del tipus d’aplicació, aquest ordinador també necessita tenir instal·lades una sèrie de dependències perquè l’aplicació s’executi correctament: certa versió de Java instal·lada, un servidor d’aplicacions (per exemple tomcat, que és el programari que realment estarà executant la meva aplicació i fent que pugui interactuar amb ella).</p>
+<p>Docker permet ficar en un contenidor (“una caixa”, una entitat autocontinguda, tancada), totes aquelles coses que l’aplicació necessita per ser executada (java, Maven, tomcat ...) i la mateixa aplicació. Així l’usuari es pot portar aquest contenidor a qualsevol màquina que tingui instal·lat Docker i executar l’aplicació sense haver de fer res més, ni preocupar-se de quines versions de programari té instal·lades a aquesta màquina.</p>
+<p>S’executarà l’aplicació de programari del contenidor de Docker, i dins d’ell estaran totes les llibreries i dependències que necessita aquesta aplicació per a funcionar.</p>
+<p>Avui dia Docker és utilitzat pels desenvolupadors de manera molt habitual, i és molt important conèixer-lo.</p>
+<p><strong>Primer pas: Instal·lació de Docker</strong>
+Per a fer la instal·lació de Docker, es tindrà com a referència el tutorial de la pàgina web de Docker.</p>
+<p>El primer que farem serà afegir el repositori i instal·lar Docker. Actualitzarem la màquina i instal·larem les dependències, afegim la clau del repositori i afegim el repositori. Després s’ha de tornar a actualitzar els repositoris i procedir a la instal·lació.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">update</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">upgrade</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="err">\</span>
+<span class="n">apt</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">transport</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">https</span><span class="w"> </span><span class="err">\</span>
+<span class="n">ca</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">certificates</span><span class="w"> </span><span class="err">\</span>
+<span class="n">curl</span><span class="w"> </span><span class="err">\</span>
+<span class="n">gnupg</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">agent</span><span class="w"> </span><span class="err">\</span>
+<span class="n">software</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">properties</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">common</span>
+<span class="n">curl</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">fsSL</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="c1">//download.docker.com/linux/ubuntu/gpg | sudo apt − key add −</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">repository</span><span class="w"> </span><span class="err">\</span>
+<span class="s">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span>
+<span class="s">$(lsb_release cs) \</span>
+<span class="s">−sudo apt − get update</span>
+<span class="s">sudo apt − get install docker − ce docker − ce − cli containerd.io</span>
+</code></pre></div></td></tr></table></div>
+<p>A l’hora d’executar Docker, tenim dues opcions: bé executar docker com a superusuari (sudo), o crear un grup amb el nom «docker», i afegir el nostre usuari.</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">groupadd</span><span class="w"> </span><span class="n">docker</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">usermod</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">aG</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="err">#</span><span class="n">USER</span>
+</code></pre></div></td></tr></table></div>
+Després, portarem a terme la verificació de la instal·lació i instal·lació de Compose. Com a primera aplicació, instal·lem el contenidor «hello-world». És un contenidor estàndard que serveix per a comprovar que la instal·lació de Docker ha estat correcta</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">world</span>
+<span class="w"> </span><span class="err">```</span>
+
+<span class="n">Instal</span><span class="err">·</span><span class="n">larem</span><span class="w"> </span><span class="n">també</span><span class="w"> </span><span class="err">«</span><span class="n">Docker</span><span class="w"> </span><span class="n">Compose</span><span class="err">»</span><span class="p">.</span><span class="w"> </span><span class="n">Ens</span><span class="w"> </span><span class="n">permetrà</span><span class="w"> </span><span class="n">crear</span><span class="w"> </span><span class="n">guions</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">YAML</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">executar</span><span class="w"> </span><span class="n">aplicacions</span><span class="w"> </span><span class="n">multicontenidor</span><span class="p">.</span><span class="w"> </span><span class="n">Avui</span><span class="w"> </span><span class="n">dia</span><span class="w"> </span><span class="n">és</span><span class="w"> </span><span class="n">molt</span><span class="w"> </span><span class="n">habitual</span><span class="w"> </span><span class="n">l</span><span class="err">’</span><span class="n">ús</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Docker</span><span class="w"> </span><span class="n">Compose</span><span class="w"> </span><span class="n">conjuntament</span><span class="w"> </span><span class="n">amb</span><span class="w"> </span><span class="n">Docker</span><span class="p">.</span>
+
+<span class="n">En</span><span class="w"> </span><span class="n">primer</span><span class="w"> </span><span class="n">lloc</span><span class="w"> </span><span class="n">descarreguem</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">instal</span><span class="err">·</span><span class="n">lem</span><span class="w"> </span><span class="n">l</span><span class="err">’</span><span class="n">executable</span><span class="p">.</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">continuació</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">l</span><span class="err">’</span><span class="n">hi</span><span class="w"> </span><span class="n">donaran</span><span class="w"> </span><span class="n">permisos</span><span class="w"> </span><span class="n">d</span><span class="err">’</span><span class="n">execució</span><span class="p">.</span>
+
+<span class="err">```</span><span class="n">java</span><span class="w"> </span><span class="n">linenums</span><span class="o">=</span><span class="s">"1"</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">curl</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="s">"https://github.com/docker/compose/releases/download/1.24.1/docker</span>
+<span class="s">− compose − $(uname −s) − $(uname − m)"</span><span class="w"> </span><span class="err">−</span><span class="n">o</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">docker</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">compose</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="o">+</span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">docker</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">compose</span>
+</code></pre></div></td></tr></table></div>
+<p>Per últim, es pot comprovar que la instal·lació ha estat un èxit demanant la versió de Composer.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">docker</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="n">compose</span><span class="w"> </span><span class="o">-</span><span class="n">version</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>Segon pas: Instal·lació d'Odoo sobre Docker</strong></p>
 <details class="question">
 <summary>Activitat 203. Pràctica guiada</summary>
 <p>Instal·lar Odoo en un contenidor Docker o en una màquina virtual (depenent dels recursos)</p>
@@ -290,7 +438,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "toc.integrate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "toc.integrate", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
 <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
 <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
 </body>

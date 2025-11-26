@@ -271,31 +271,93 @@
 </details>
 <h3 id="caracteristiques-dodoo">Característiques d'Odoo</h3>
 <p>Les característiques bàsiques que hauríem de tenir en compte a l'hora d'avaluar un sistema ERP-CRM i els valors per al sistema Odoo són:</p>
-<div class="highlight"><pre><span></span><code>- Llicència: LGPLv3
-- Desplegaments possibles:
-    - On-premise sota els SO: Linux i Windows
-    - SaaS
-    - odoo.sh és una plataforma per desenvolupadors, que el hosting i permet de manera molt senzilla crear nous mòduls, provar-los, i portar-los a producció.
-- Arquitectura: Client-servidor amb tres capes clarament diferenciables:
-    - la base de ades en l'SGBD PostgreSQL, que només conté dades i no conté cap lògica de negoci (és a dir, no incorpora funcions, procediments o disparadors)
-    - El servidor Odoo que conté tota la lògica de negoci amb un nucli base i una estructura que permet anar afegint mòduls segons les necessitats de l’organització. Odoo facilita una llarga llista de mòduls que es pot ampliar amb el disseny de mòduls propis per donar cobertura a les necessitats de l’organització.
-
-    - La capa dels clients consisteix en un client web, accessible des de qualsevol navegador.
-- Sistema Operatiu: Servidor sobre Windows o Linux
-- SGBD: PostgreSQL (el fet que la BD no contingui cap lògica de negoci fa pensar que hauria de ser fàcil la substitució de PostgreSQL per un altre SGBD).
-- Cost per a la versió Enterprise: Pot trobar-se una simulació a: bit.ly/31sXlWk. Com es pot comprovar els preus depenen del nombre d’usuaris i els mòduls que es trien.
-</code></pre></div>
+<ul>
+<li><strong>Llicència: LGPLv3</strong></li>
+<li><strong>Desplegaments possibles:</strong><ul>
+<li>On-premise sota els SO: Linux i Windows</li>
+<li>SaaS</li>
+<li>odoo.sh és una plataforma per desenvolupadors, que el hosting i permet de manera molt senzilla crear nous mòduls, provar-los, i portar-los a producció.</li>
+</ul>
+</li>
+<li>
+<p><strong>Arquitectura: Client-servidor amb tres capes clarament diferenciables:</strong></p>
+<ul>
+<li>la base de ades en l'SGBD PostgreSQL, que només conté dades i no conté cap lògica de negoci (és a dir, no incorpora funcions, procediments o disparadors)</li>
+<li>
+<p>El servidor Odoo que conté tota la lògica de negoci amb un nucli base i una estructura que permet anar afegint mòduls segons les necessitats de l’organització. Odoo facilita una llarga llista de mòduls que es pot ampliar amb el disseny de mòduls propis per donar cobertura a les necessitats de l’organització.</p>
+</li>
+<li>
+<p>La capa dels clients consisteix en un client web, accessible des de qualsevol navegador.</p>
+</li>
+<li><strong>Sistema Operatiu:</strong> Servidor sobre Windows o Linux</li>
+<li><strong>SGBD:</strong> PostgreSQL (el fet que la BD no contingui cap lògica de negoci fa pensar que hauria de ser fàcil la substitució de PostgreSQL per un altre SGBD).</li>
+<li>Cost per a la versió Enterprise: Pot trobar-se una simulació a: bit.ly/31sXlWk. Com es pot comprovar els preus depenen del nombre d’usuaris i els mòduls que es trien.</li>
+</ul>
+</li>
+</ul>
 <p>Respecte a les funcionalitats segons les versions, la <strong>versió Enterprise</strong> (de pagament) incorpora entre d'altres:</p>
-<div class="highlight"><pre><span></span><code>- Llicència "Odoo Enterprise Edition License 1.0.
-- Suport funcional il·limitat.
-- Actualització de versions
-- Hosting.
-- Interfície d'usuari mòbil.
-- Odoo studio (dissenyar de manera gràfica mòduls, informes, pantalles...)
-- Mòduls exculsius que amplien estàndards.
-</code></pre></div>
+<ul>
+<li>Llicència "Odoo Enterprise Edition License 1.0.</li>
+<li>Suport funcional il·limitat.</li>
+<li>Actualització de versions</li>
+<li>Hosting.</li>
+<li>Interfície d'usuari mòbil.</li>
+<li>Odoo studio (dissenyar de manera gràfica mòduls, informes, pantalles...)</li>
+<li>Mòduls exculsius que amplien estàndards.</li>
+</ul>
 <details class="question">
-<summary>Activitat 202. Taula resum</summary>
+<summary>Activitat 202. Implantació d'Odoo. Passos previs</summary>
+<p>Amb aquesta activitat inicieu el procés d’implantació tècnica d’un ERP-CRM (concretament Odoo). L’objectiu és que els alumnes entenguen quines són les fases i decisions inicials necessàries abans d’instal·lar un sistema ERP, i planifiquen una implantació en un entorn controlat. Aquesta planificació servirà de guia per a instal·lacions reals i futures pràctiques.</p>
+<p><strong>Tasques a realitzar</strong></p>
+<ol>
+<li>Anàlisi preliminar de l'empresa<ul>
+<li>Suposau un escenari fictici: una empresa mediana/pime amb unes condicions que vosaltres mateixos definireu (nombre de treballadors, tipus d’activitat, processos que vol gestionar: compres, vendes, magatzem, clients, facturació, etc.).</li>
+<li>Descriviu quines necessitats té l’empresa: què cal gestionar, quins departaments, quins fluxos de treball, què esperen de l’ERP-CRM.</li>
+</ul>
+</li>
+<li>Elaboració del pla d'implantació<ul>
+<li>Definiu les fases de la implantació: anàlisi de requisits, selecció de mòduls, instal·lació, configuració, migració (si cal), posada en marxa, formació i proves. Aquesta fase ha de seguir un guió similar al descrit en la teoria sobre processos d’implantació d’un ERP-CRM.</li>
+<li>Per cada fase, indiqueu les activitats tècniques i organitzatives necessàries: per exemple, preparació del servidor, definició de dades mestres, definició de permisos i rols d’usuari, backups, definició d’usuari de base de dades, etc.</li>
+</ul>
+</li>
+<li>Assignació de recursos i requeriments tècnics<ul>
+<li>Determineu quina infraestructura farà servir: servidor (o màquina virtual), sistema operatiu, base de dades, espai, memòria, còpies de seguretat.</li>
+<li>Inclogueu un esquema/diagrama d’arquitectura amb els components: servidor d’aplicació, base de dades, accés via client (navegador), etc.</li>
+</ul>
+</li>
+<li>Pla de gestió del canvi i formació d'usuaris<ul>
+<li>Indiqueu com capacitaríeu als usuaris de l’empresa: formació inicial, manuals d’usuari, suport, proves pilot, període de convivència (sistema antic i nou). Aquest punt és clau, ja que una bona implantació no depén només de la instal·lació tècnica.</li>
+<li>Preveieu possibles resistències o problemes organitzatius i com els abordaríeu.</li>
+</ul>
+</li>
+<li>Pla de proves i validació.<ul>
+<li>Definiu quines proves faríeu abans del “go-live”: funcionalitat, integració, rendiment, còpies de seguretat, restauració, permisos, etc</li>
+<li>Indiqueu qui és responsable de cada prova i com documentareu els resultats.</li>
+</ul>
+</li>
+<li>Cronograma i responsabilitats<ul>
+<li>Feu un calendari provisional amb fites importants per a cada fase.</li>
+<li>Assigneu rols (per exemple: administrador, tècnic BD, usuari pilot, formador…) i responsabilitats.</li>
+</ul>
+</li>
+<li>Informe final amb justificació.<ul>
+<li>El resultat del vostre treball serà un document d’implantació inicial: pla, arquitectura, requeriments i calendarització. Acompanyat d’una breu memòria explicativa on justifiqueu les decisions.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Lliurament esperat</strong></p>
+<ul>
+<li>Document de text amb:<ul>
+<li>Descripció de l'empresa fictícia</li>
+<li>Pla d'implantació amb totes les fase i tasques associades</li>
+<li>Esquema d'arquitectura proposada amb requeriments tècnics.</li>
+<li>Pla de formació i gestió del canvi.</li>
+<li>Pla de proves i validació.</li>
+<li>Cronograma i assignació de rols</li>
+<li>Memòria justificativa de les decicions</li>
+</ul>
+</li>
+</ul>
 <p>Anotar característiques clau d'Odoo segons rols (usuari, tècnic, administrador)</p>
 </details>
 <h3 id="implantacio-tecnica-dodoo">Implantació tècnica d'Odoo</h3>

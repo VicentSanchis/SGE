@@ -426,7 +426,185 @@ Després, portarem a terme la verificació de la instal·lació i instal·lació
 <p>Per últim, es pot comprovar que la instal·lació ha estat un èxit demanant la versió de Composer.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">docker</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">compose</span><span class="w"> </span><span class="o">-</span><span class="n">version</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Segon pas: Instal·lació d'Odoo sobre Docker</strong></p>
+<p><strong>Segon pas: Instal·lació d'Odoo sobre Docker</strong>
+Crearem un guió en format YAML. Iniciarem un contenidor per al servidor postgreSQL i un altre per a Odoo depenent del de postgreSQL.</p>
+<p>El nom per defecte de l'arxiu és docker-compose.yml
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>$&gt; mkdir odoo17
+$&gt; cd odoo17/
+$&gt; mkdir config addons data db_data
+$&gt; sudo chown -R 101:101 data
+$&gt; nano docker-compose.yml
+</code></pre></div></td></tr></table></div>
+El contingut de l'arxiu docker-compose.yml per a l'última versió d'Odoo, en el moment de la realització del present manual és:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>services:
+  web:
+    image: odoo:17
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./data:/var/lib/odoo
+    environment:
+      - DB_HOST=db
+      - DB_USER=odoo
+      - DB_PASSWORD=odoo
+      - DB_NAME=postgres
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+</code></pre></div></td></tr></table></div>
+<p>Es generen <strong>dos contenidors:</strong>
+- Contenidor amb una instància de postgresql:
+    - Genera una base de dades amb el nom de postgres
+    - Genera un usuari amb el nom odoo i password odoo
+- Contenidor amb una instància d'Odoo:
+    - Es connecta al contenidor postresql creat al pas anterior.
+    - Fa una redirecció de ports, de manera que el port 8069 del host es redirigeix al port 8069 del contenidor. Així podrà connectar-se a Odoo des de localhost:8069
+    - Fa una redirecció de carpetes, de manera que les carpetes del host ./config i ./addons donant accés a les carpetes /etc//odoo i /mnt/extra-addons del contenidor respectivament.</p>
+<p>... i ja podem obrir el navegador i accedir a Odoo a l'adreça localhost:8069</p>
+<div class="admonition warning">
+<p class="admonition-title">Comprovem el YAML</p>
+<p>Per comprovar si has definit bé el fitxer de configuració yaml pots executar la següent línia:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker compose config
+</code></pre></div></td></tr></table></div>
+<p>Si el YAML està bé, mostrarà la versió "normalitzada" del fitxer.
+Si hi ha un error, et dirà exactament la línia.</p>
+</div>
+<p>Es generen <strong>dos contenidors</strong>:</p>
+<ul>
+<li>Contenidor amb una instància de postgresql:<ul>
+<li>Genera una base de dades amb el nom postgres</li>
+<li>Genera un usuari amb el nom odoo i password odoo</li>
+</ul>
+</li>
+<li>Contenidor amb una instància d'Odoo:<ul>
+<li>Es connecta al contenidor postgresql creat en el pas anterior.</li>
+<li>Fa una redirecció de ports, de manera que el port 8069 del host es redirigeix al port 8069 del contenidor. Així podrà connectar-se a Odoo des de localhost:8069</li>
+<li>Fa una redirecció de carpetes, de manera que les carpetes del host ./config i ./addos donant accés a les carpetes /etc/odoo i /mnt/extra-addons del contenidor respectivament.</li>
+</ul>
+</li>
+</ul>
+<h4 id="com-arrancar">Com arrancar</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker compose up -d
+</code></pre></div></td></tr></table></div>
+<p>Si tot ha funcionat correctament deuries veure una imatge semblant a la següent:</p>
+<center>
+<img src="../assets/images/StartDocker.png"/>
+</center>
+<p>... i ja podem obrir el navegador i accedir a Odoo a l'adreça localhost:8069</p>
+<p>Si tot ha funcionat de forma correcta deuries veure una pàgina semblant a la següent:</p>
+<center>
+<img src="../assets/images/DockerFirstPage.png"/>
+</center>
+<p>Altres comandes amb Docker
+- docker ps. mostra tots els contenidors que estan executant-se en un determinat moment. Si afegim -a, ens mostra tots els contenidors, tant els que s'estan executant com els que estan parats.
+- docker run. Crea un nou contenidor, descarregant-lo d'Internet si és necessari.
+- docker start, stop, pause, unpause. Inicia, atura, pausa o reprèn un contenidor.
+- docker exec. Executa una comanda en un contenidor que ja existeix.
+- docker rm. Esborra un contenidor.</p>
+<h4 id="usuaris-al-voltant-dun-servidor-odoo">Usuaris al voltant d'un servidor Odoo</h4>
+<p>Abans de procedir a gestionar empreses, és convenient entendre els tres tipus d’usuaris existents al voltant d’un servidor Odoo:</p>
+<ol>
+<li>Usuari del servidor PostgreSQL amb privilegi de creació de bases de dades: és l’usuari de PostgreSQL que utilitza el servidor Odoo per crear i eliminar empreses (bases de dades) dins el servidor PostgreSQL. Una empresa d’Odoo es correspon amb una base de dades dins el servidor PostgreSQL.<ul>
+<li>En cas que el servidor PostgreSQL hagi estat instal·lat pel procediment d’instal·lació d’Odoo All-In-One, el procés proposa l’usuari openpg (contrasenya openpgpwd) com a superusuari del servidor PostgreSQL, però es pot decidir qualsevol parella (usuari-contrasenya). Durant el tutorial d’instal·lació s’ha proposat ioc_admin/10c_4dm1n</li>
+<li>En cas que el servidor PostgresSQL hagi estat instal·lat de manera independent al procediment d’instal·lació d’Odoo, disposarà d’un superusuari i hauríem de poder utilitzar aquest (sempre que no s’anomeni postgres, ja que per qüestions de seguretat Odoo no permet aquest nom d’usuari) o qualsevol altre amb autorització per crear bases de dades per tal que l’utilitzi l’Odoo per crear i eliminar empreses (bases de dades) dins el servidor PostgreSQL. En un servidor Linux es pot crear aquest usuari amb la sentència sudo su - postgres -c “createuser -s -P odoo13”.</li>
+<li>L’usuari del servidor PostgreSQL amb autorització per crear bases de dades i la seva contrasenya han de residir, respectivament, en les entrades db_user i db_password del fitxer odoo.conf. Si en comproveu el contingut, hi veureu l’usuari i la contrasenya que havíem indicat en el procés d’instal·lació.</li>
+</ul>
+</li>
+<li><strong>Usuari administrador del servidor Odoo:</strong> és un usuari únic del servidor Odoo, que és el que pot crear i eliminar les empreses. No té nom i únicament té contrasenya. Aquesta contrasenya es configura a l’arxiu odoo.conf.</li>
+<li><strong>Usuaris de cada empresa creada en el servidor Odoo:</strong> el procés de creació d’una empresa ve donat amb un usuari administrador, que es genera mitjançant el formulari inicial de creació de l’empresa. El seu username serà correu electrònic del responsable. L’usuari admin de cada empresa té tots els privilegis i, una vegada connectat a l’empresa, pot crear usuaris, grups de privilegis sobre els objectes d’Odoo (tercers, productes, comandes, albarans, factures...) i assignar usuaris als diversos grups de privilegis. En cas de perdre la contrasenya de l’usuari admin, un usuari administrador del servidor PostgreSQL pot recuperar-la tot consultant-la directament la base de dades, a través de les eines d’accés que el servidor PostgreSQL facilita</li>
+</ol>
+<p>El procés de creació d’una empresa permet carregar unes dades de demostració i, en tal situació, també hi incorpora un usuari de nom demo i contrasenya demo. Aquest usuari no existeix en la creació d’una empresa buida.</p>
+<h4 id="coneixements-basics-del-servidor-postgresql">Coneixements bàsics del servidor PostgreSQL</h4>
+<p>PostgreSQL és un SGBD relacional distribuït sota llicència BSD, desenvolupat per PostgreSQL Global Development Group.</p>
+<div class="admonition note">
+<p class="admonition-title">Versions de PostgreSQL</p>
+<p>En 12-04-2020 hi ha vàries versions de PostgreSQL desenvolupant-se a la vegada, de manera que poden descarregar-se de la web les 12.2, 11.7, 10.12, 9.6.17, 9.5.21, i 9.4.26. La instal·lació d’Odoo per a Windows incorpora  PostgreSQL en la seva versió 9.6, i a Linux hem fet servir la versió 10.12. A la documentació oficial d’Odoo no especifica quina ha de ser la versió del SGBD.</p>
+</div>
+<p>Nosaltres, com a implantadors tècnics d’ERP, hem de ser coneixedors de <strong>l’estructura de la base de dades</strong> per si hem de desenvolupar mòduls que complementin la funcionalitat que facilita l’ERP.</p>
+<p>Com que la base de dades es troba implementada en un SGBD concret, ens convé conèixer les eines bàsiques de què disposem per <strong>moure’ns amb facilitat dins de l’SGBD</strong>. La majoria d’SGBD actuals faciliten dos tipus d’eines per accedir a les bases de dades i facilitar la gestió:</p>
+<ul>
+<li>Eines gràfiques i/o consoles textuals: basades en l’arquitectura client-servidor, obliguen a instal·lar l’eina a la màquina des de la qual es vol accedir a l’SGBD, que pot residir en una màquina remota.</li>
+<li>Eines gràfiques web: permeten l’accés des de navegadors i, per tant, eviten el fet d’haver d’instal·lar cap programari client.</li>
+</ul>
+<p>Per <strong>accedir a PostgreSQL</strong> disposem de moltes eines. Entre elles, cal conèixer l’existència de:</p>
+<ul>
+<li>Eina gràfica pgAdminIII, amb arquitectura client-servidor.</li>
+<li>A partir de PostgreSQL 10 pgadminIII per a Windows deixa de ser compatible 100% (encara que es mostra molt fiable per a fer les operacions més senzilles). S’ha creat pgAdminIV, que és una eina amb servidor web propi.</li>
+<li>Consola textual psql, amb arquitectura client-servidor.</li>
+<li>Eina gràfica phpPgAdmin, amb servidor web (necessita PHP).</li>
+</ul>
+<h5 id="eina-pgadmin">Eina pgAdmin</h5>
+<p>L’eina pgAdmin és una de les eines més habituals d’utilitzar <strong>per accedir a un servidor PostgreSQL</strong> (local o remot) i es pot instal·lar a qualsevol màquina. La podem baixar de la pàgina oficial (www.pgadmin.org) i és tan habitual que l’Odoo la incorpora en la instal·lació per a Windows que facilita</p>
+<p>Caldrà <strong>determinar</strong> els servidors, els usuaris, les bases de dades i els seus esquemes.</p>
+<p><strong>Servidors</strong>
+La part esquerra de la pantalla principal de pgAdmin està destinada a incorporar tots els servidors PostgreSQL als quals volem accedir amb aquesta eina, ja siguin a la mateixa màquina o en màquines remotes. Cal comentar que en una mateixa màquina hi poden coexistir diversos servidors PostgreSQL, amb la precaució que han d’escoltar per diferents ports</p>
+<p>Podem comprovar que l’eina pgAdmin que instal·la Odoo ja té registrat el servidor PostgreSQL instal·lat per Odoo a la màquina i el veiem acompanyat d’una creu vermella que indica que no hi estem connectats. Per establir connexió i poder
+gestionar el seu contingut cal situar-nos al damunt i prémer amb doble clic del ratolí.</p>
+<p>Si ens situem damunt la connexió PostgreSQL for Odoo (localhost:5432) i premem el botó secundari del ratolí, podrem accedir a les propietats</p>
+<p>Observem que en aquesta pàgina de propietats podrem canviar l’usuari per defecte i també podrem enregistrar la contrasenya, una vegada connectats, per evitar haver d’introduir-la cada vegada que accedim al servidor PostgreSQL.</p>
+<p>S’ha d’anar amb molt de compte a l’hora de deixar les contrasenyes enregistrades; això només s’hauria de fer en màquines de les quals tenim la seguretat que només hi tindran accés usuaris que, a la vegada, hagin de tenir accés als
+servidors PostgreSQL enregistrats en pgAdmin. Les contrasenyes enregistrades des de pgAdmin es troben en el fitxer pgpass.conf ubicat dins d’una carpeta anomenada PostgreSQL que es troba dins del perfil de l’usuari que ha creat
+les connexions i a la màquina client des de la qual s’executa pgAdmin </p>
+<p>Aquesta ubicació depèn de la versió del SO.</p>
+<p>És important tenir-ho present, perquè la resta d’eines de PostgreSQL instal·lades en el sistema utilitzen el mateix arxiu per registrar o comprovar les contrasenyes. En conseqüència, si un usuari ha registrat una connexió des de pgAdmin amb un usuari i la corresponent contrasenya, la resta d’eines de PostgreSQL no li exigiran introduir la contrasenya per establir connexió amb el servidor i utilitzaran l’usuari pel qual hi ha la contrasenya registrada.</p>
+<p>Una vegada establerta la connexió contra un servidor PostgreSQL la part esquerra de la pantalla ens mostra el contingut del servidor PostgreSQL</p>
+<p><strong>Usuaris</strong>
+Un servidor PostgreSQL pot tenir molts usuaris. La imatge ens mostra només un usuari, de nom ioc_admin, que és el superusuari del servidor PostgreSQL. Si ens hi situem al damunt i premem el botó secundari del ratolí per anar a les seves propietats, observarem que té privilegis totals</p>
+<p>De moment no ens cal crear nous usuaris, però quan l’ERP es posa en execució en una organització, aquesta pot tenir usuaris finals que vulguin poder efectuar consultes contra les bases de dades. En aquest cas els haurem de facilitar un usuari amb els privilegis de lectura adequats, però mai d’escriptura, a les bases de dades i taules o vistes que corresponguin.</p>
+<p>No hem de confondre els usuaris de l’SGBD amb els usuaris de l’ERP. Els usuaris de l’ERP estan emmagatzemats en taules pròpies de l’ERP i l’ERP utilitza un usuari de PostgreSQL (ioc_admin en aquest cas) per accedir a la BD de l’empresa.</p>
+<p>Crearem un nou usuari superadministrador per a no interferir amb l’usuari que ha creat Odoo. L’hi direm ioc_user, amb el password 10c_us3r. Farem click amb el botó dret i triarem «New login role»</p>
+<p>A continuació triarem el nom, el password, i l’hi donarem privilegis de superusuari</p>
+<p><strong>Bases de dades</strong>
+Un servidor PostgreSQL pot tenir diverses bases de dades, però com a mínim n’ha de tenir una. En moltes ocasions, la primera base de dades que s’instal·la s’anomena “postgres”, però podria tenir qualsevol altre nom</p>
+<p>El procés d’instal·lació d’Odoo ha seguit el costum d’anomenar “postgres” la primera base de dades del servidor. Aquesta primera base de dades és especial en el sentit que és la base de dades de manteniment del servidor i mai podrà ser eliminada. De fet, si intentem eliminar-la, ens apareixerà un missatge informant que és la base de dades de manteniment i no pot ser eliminada.</p>
+<p>A mesura que anem creant empreses aniran apareixent les corresponents bases de dades en el servidor PostgreSQL. Cada base de dades tindrà els seus usuaris per gestionar l’empresa des d’Odoo.</p>
+<p><strong>Esquemes</strong>
+Una base de dades de PostgreSQL està compartimentada en esquemes, i com a mínim hi ha un esquema de nom públic; els continguts d’aquest esquema són accessibles per a tots els usuaris que tinguin accés a la base de dades. Aquest és
+el cas de les bases de dades que crea Odoo. Cada empresa es correspon amb una base de dades que té tota la informació dins l’únic esquema de nom públic.</p>
+<p>Un esquema conté tot allò que en altres SGBD és el contingut d’una base de dades: dominis, taules, vistes, funcions, seqüències i disparadors</p>
+<p>Durant la implantació d’un ERP pot ser necessari analitzar la base de dades, i conèixer les taules que la formen. Podem accedir a la llista de taules, i dins cada taula, als camps i la seva descripció</p>
+<p><strong>Treballar amb la base de dades</strong>
+Si pensem utilitzar pgAdmin per executar sentències DML (insert, update, delete), cal saber que està configurada amb el comportament autocommit on. Aixó vol dir que qualsevol operació de modificació de dades sobre la base de dades és
+automàticament validada sense que l’usuari hagi d’efectuar commit, i, per tant, no és possible invocar un rollback.</p>
+<p>PgAdmin incorpora una consola SQL on podem introduir les consultes i comprovar els resultats</p>
 <details class="question">
 <summary>Activitat 203. Pràctica guiada</summary>
 <p>Instal·lar Odoo en un contenidor Docker o en una màquina virtual (depenent dels recursos)</p>
